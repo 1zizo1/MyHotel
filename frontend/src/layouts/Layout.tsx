@@ -1,9 +1,11 @@
-import Header from "../src/components/Header";
+import Header from "../components/Header";
+import Hero from "../components/Hero";
 
 const Layout = () => {
     return (
         <div className="flex flex-col min-h-screen">
         <Header/>
+        <Hero/>
     </div>
     );
     
