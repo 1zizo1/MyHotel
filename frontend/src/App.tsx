@@ -11,10 +11,17 @@ const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Layout></Layout>}>
-          <Route path="/Search" element={<>Search Page</>} />
+        <Route path="/" element={
+          <Layout>
+          <p>HOme page</p>
+        </Layout>
+      }/>
+          <Route path="/Search" element={
+            <Layout>
+          <p>search page</p>
+        </Layout>} />
           <Route path="*" element={<Navigate to="/"/>} />
-        </Route>
+        
       </Routes>
 
     </Router>
