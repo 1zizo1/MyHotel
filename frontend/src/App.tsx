@@ -7,6 +7,7 @@ import {
   from "react-router-dom";
 import Layout from "./layouts/Layout";
 import Register from "./pages/Register";
+import SignIn from "./pages/SignIn";
 
 const App = () => {
   return (
@@ -14,20 +15,27 @@ const App = () => {
       <Routes>
         <Route path="/" element={
           <Layout>
-          <p>HOme page</p>
-        </Layout>
-      }/>
-          <Route path="/Search" element={
-            <Layout>
-          <p>search page</p>
-        </Layout>} />
+            <p>HOme page</p>
+          </Layout>
+        } />
+        <Route path="/Search" element={
+          <Layout>
+            <p>search page</p>
+          </Layout>} />
         <Route path="/register" element={
           <Layout>
-            <Register/>
+            <Register />
           </Layout>
-        }/>
-          <Route path="*" element={<Navigate to="/"/>} />
-        
+        } />
+
+        <Route path="/sign-in" element={
+          <Layout>
+            <SignIn />
+          </Layout>
+        } />
+
+        <Route path="*" element={<Navigate to="/" />} />
+
       </Routes>
 
     </Router>
