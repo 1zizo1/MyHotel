@@ -5,7 +5,11 @@ import dotenv from "dotenv";
 import { check, validationResult } from "express-validator";
 
 dotenv.config();
-
+//joi for validation in future 
+//mvc for stucture 
+//i wont use try catchiwill use asnyc handler 
+//localization for rtl languages and switch between language 
+//orm sqlaziation 
 const router = express.Router();
 router.post(
   "/register",
