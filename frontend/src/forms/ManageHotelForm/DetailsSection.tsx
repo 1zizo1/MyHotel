@@ -46,10 +46,11 @@ export default function DetailsSection() {
 
             <label className=" text-gray-700 text-sm font-bold max-w-[50%]">
                 Star Rating
-                <select {...register("starRating",{
+                <select {...register("starRating", {
                     required:"This field is required"
-                })} className='border rounded w-full p-2 to-gray-700 font-normal' >
-                <option className='text-sm font-bold'>
+                })} 
+                className='border rounded w-full p-2 to-gray-700 font-normal' >
+                <option value="" className='text-sm font-bold'>
                     Select as Rating
                 </option>
                 {[1,2,3,4,5].map((num)=>(

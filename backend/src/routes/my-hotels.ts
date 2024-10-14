@@ -10,7 +10,7 @@ const storage = multer.memoryStorage();
 const upload = multer({
   storage: storage,
   limits: {
-    fieldSize: 5 * 1024 * 1024, //5 MB
+    fileSize: 5 * 1024 * 1024, //5 MB
   },
 });
 
@@ -26,20 +26,20 @@ router.post(
       .notEmpty()
       .isNumeric()
       .withMessage("pricePerNight is required must be a number"),
-    body("facilites")
+    body("facilities")
       .notEmpty()
       .isArray()
-      .withMessage("facilites are required"),
+      .withMessage("facilities are required"),
   ],
   upload.array("imageFiles", 6),
   async (req: Request, res: Response) => {
     try {
-      const imageFiles = req.files as Express.Multer.File[];
+      const imageFiles = req.files as Express.Multer.File[];    
       const newHotel: HotelType = req.body;
       // 1. upload the images to cloudinary
       const uploadPromises = imageFiles.map(async (image) => {
         const b64 = Buffer.from(image.buffer).toString("base64");
-        let dataURI = "data:" + image.mimetype + ";base," + b64;
+        let dataURI = "data:" + image.mimetype + ";base64," + b64;
         const res = await cloudinary.v2.uploader.upload(dataURI);
         return res.url;
       });
@@ -55,7 +55,7 @@ router.post(
       res.status(201).send(hotel);
     } catch (e) {
       console.log("Error Creating hotel", e);
-      res.status(500).json({ message: "Something went wrong" });
+      res.status(500).json({ message: "Something went wrong",e });
     }
   }
 );
