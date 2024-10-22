@@ -4,6 +4,8 @@ import TypeSection from "./TypeSection";
 import FacilitiesSection from "./FacilitiesSection";
 import GuestsSection from "./GuestsSection";
 import ImagesSection from "./ImagesSection";
+import { HotelType } from "../../../../backend/src/shared/types";
+import { useEffect } from "react";
 
 export type HotelFormData = {
     name: string;
@@ -18,18 +20,29 @@ export type HotelFormData = {
     starRating: number;
     imageUrls: string[];
     imageFiles: FileList;
-}
+};
 
-type props={
-    onSave:(hotelFormData:FormData)=> void
-    isLoading:boolean
-}
-export default function ManageHotelForm({onSave,isLoading}:props) {
-    const formMethods = useForm<HotelFormData>()
-    const { handleSubmit } = formMethods;
+type Props = {
+    hotel?: HotelType
+    onSave: (hotelFormData: FormData) => void
+    isLoading: boolean
+};
+
+export default function ManageHotelForm({ onSave, isLoading, hotel }: Props) {
+    const formMethods = useForm<HotelFormData>();
+    const { handleSubmit, reset } = formMethods;
+
+    useEffect(() => {
+        reset(hotel);
+    }, [hotel, reset]);
+
     const onSubmit = handleSubmit((formDataJson: HotelFormData) => {
-        const formData = new FormData()
-        formData.append("name", formDataJson.name)
+        const formData = new FormData();
+        if (hotel) {
+            formData.append("hotelId", hotel._id);
+
+        }
+        formData.append("name", formDataJson.name);
         formData.append("city", formDataJson.city);
         formData.append("country", formDataJson.country);
         formData.append("description", formDataJson.description);
@@ -48,14 +61,12 @@ export default function ManageHotelForm({onSave,isLoading}:props) {
                 formData.append(`imageUrls[${index}]`, url);
             });
         }
-
         Array.from(formDataJson.imageFiles).forEach((imageFile) => {
             formData.append(`imageFiles`, imageFile);
         });
-    onSave(formData);
+        onSave(formData);
+    });
 
-
-    })
     return (
         <FormProvider {...formMethods}>
             <form className="flex flex-col gap-10" onSubmit={onSubmit}>
@@ -65,14 +76,16 @@ export default function ManageHotelForm({onSave,isLoading}:props) {
                 <GuestsSection />
                 <ImagesSection />
                 <span className="flex justify-end">
-                    <button className=" text-blue-600 px-4 py-2 font-bold bg-white border border-blue-600 rounded-lg hover:bg-blue-600 hover:text-white transition-colors duration-300 shadow-md hover:shadow-lg disabled:bg-gray-500"
-                    disabled={isLoading}
+                    <button
+                    type="submit"
+                        className={`text-white px-4 py-2 font-bold rounded-lg transition-colors duration-300 shadow-md
+            ${isLoading ? "bg-gray-400" : "bg-green-600 hover:bg-green-700"}`}
+                        disabled={isLoading}
                     >
-                        {isLoading?"Saving...":"Save"}
-                        
+                        {isLoading ? "Saving..." : "Save"}
                     </button>
                 </span>
             </form>
         </FormProvider>
-    )
+    );
 }
