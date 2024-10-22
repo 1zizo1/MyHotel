@@ -43,6 +43,6 @@ app.get("/", (req: Request, res: Response) => {
     res.send("Welcome to the MERN Booking App API");
   });
   
-app.listen(7000,() =>{
-console.log("server running on Localhost:7000");
+app.listen(8000,() =>{
+console.log("server running on Localhost:8000");
 });
