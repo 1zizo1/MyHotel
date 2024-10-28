@@ -14,11 +14,14 @@ type SearchContext={
         adultCount: number,
         childCount: number
       ) => void;
-}
+};
+
 const SearchContext = React.createContext<SearchContext | undefined>(undefined);
+
 type  SearchContextProviderProps={
     children:React.ReactNode
-}
+};
+
 export const SearchContextProvider = ({children}: SearchContextProviderProps)=>{
    
     const [destination, setDestination] = useState<string>(
