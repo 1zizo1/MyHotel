@@ -112,6 +112,7 @@ export const fetchMyHotelById = async (hotelId: string): Promise<HotelType> => {
   }
 
   return response.json();
+ 
 };
 
 export const updateMyHotelById = async (hotelFormData: FormData) => {
@@ -127,8 +128,8 @@ export const updateMyHotelById = async (hotelFormData: FormData) => {
   if (!response.ok) {
     throw new Error("Failed to update Hotel");
   }
-
   return response.json();
+
 };
 
 export type SearchParams = {

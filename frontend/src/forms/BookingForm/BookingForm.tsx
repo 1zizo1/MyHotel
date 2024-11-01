@@ -63,7 +63,7 @@ const BookingForm = ({ currentUser, paymentIntent }: Props) => {
             hotelId: hotelId,
             totalCost: paymentIntent.totalCost,
             paymentIntentId: paymentIntent.paymentIntentId,
-        },
+          },
     });
 
     const onSubmit = async (formData: BookingFormData) => {
@@ -79,6 +79,8 @@ const BookingForm = ({ currentUser, paymentIntent }: Props) => {
 
         if (result.paymentIntent?.status === "succeeded") {
             bookRoom({ ...formData, paymentIntentId: result.paymentIntent.id });
+            console.log("succsess");
+            
         }
     };
 
