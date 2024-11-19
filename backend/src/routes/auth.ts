@@ -43,7 +43,6 @@ router.post(
 
         res.cookie("auth_token", token, {
           httpOnly: true,
-          sameSite:"none",
           secure: process.env.NODE_ENV === "production", // Secure in production
           maxAge: 86400000, // 1 day
         });

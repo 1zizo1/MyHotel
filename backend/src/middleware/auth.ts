@@ -19,7 +19,7 @@ const verifyToken = (req: Request, res: Response, next: NextFunction) => {
     req.userId = (decoded as JwtPayload).userId;
     next();
   } catch (error) {
-    return res.status(401).json({ message: "unauthorized" });
+    return res.status(401).json({ message: "unauthorized" , error });
   }
 };
 export default verifyToken;
