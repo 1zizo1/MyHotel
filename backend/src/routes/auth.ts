@@ -45,7 +45,7 @@ router.post(
           httpOnly: true,
           secure: true,     
           // process.env.NODE_ENV === "production", // Secure in production
-          sameSite: "none", // Allow cross-origin
+          // sameSite: "none", // Allow cross-origin
           maxAge: 86400000, // 1 day
         });
 
