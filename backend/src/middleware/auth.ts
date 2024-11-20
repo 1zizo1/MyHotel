@@ -13,9 +13,7 @@ const verifyToken = (req: Request, res: Response, next: NextFunction) => {
   const token = req.cookies["auth_token"];
   if (!token) {
     console.log("no token ");
-    console.log("Cookies received:", req.cookies);
-
-    return res.status(401).json({ message: "unauthorized no token " , req});
+    return res.status(401).json({ message: "unauthorized no token " });
   }
   // Ensure JWT_SECRET_KEY is loaded
   if (!process.env.JWT_SECRET_KEY) {
